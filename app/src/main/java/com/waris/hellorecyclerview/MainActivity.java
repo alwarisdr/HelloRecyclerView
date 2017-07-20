@@ -4,15 +4,20 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+//1 implements CustomerAdapter.ListItemClickListener
+public class MainActivity extends AppCompatActivity implements CustomerAdapter.ListItemClickListener {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mlayoutManager;
+
+    //2
+    private Toast mToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(mlayoutManager);
 
-        mAdapter = new CustomerAdapter(this,initPlayer());
+        mAdapter = new CustomerAdapter(this,initPlayer(), this);
         mRecyclerView.setAdapter(mAdapter);
 
     }
@@ -41,5 +46,20 @@ public class MainActivity extends AppCompatActivity {
         dataset.add(suarez);
 
         return dataset;
+    }
+
+
+
+    //2
+    @Override
+    public void onListItemClick(int clickedItemIndex) {
+
+        if(mToast != null){
+            mToast.cancel();
+        }
+
+        String toastMessage = "Item #"+ clickedItemIndex +" clicked.";
+        mToast = Toast.makeText(this,toastMessage,Toast.LENGTH_LONG);
+        mToast.show();
     }
 }

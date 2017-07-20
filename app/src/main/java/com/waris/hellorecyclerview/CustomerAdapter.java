@@ -17,15 +17,26 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
 
     private Context mContext;
     private List<Player> mPlayers;
+    //3
+    final private ListItemClickListener mOnClickListener;
+
+    //1
+    public interface ListItemClickListener{
+        //2
+        void onListItemClick(int clickedItemIndex);
+    }
 
     //Constructor
-    public CustomerAdapter(Context context,List<Player> dataset) {
+    public CustomerAdapter(Context context,List<Player> dataset,ListItemClickListener listener) {
+        //4
+        this.mOnClickListener = listener;
         this.mContext = context;
         this.mPlayers = dataset;
     }
 
     //สรา้ง ViewHolder ขึ้นมา
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    //5 implements View.OnClickListener
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView mName;
         public TextView mClub;
@@ -36,7 +47,16 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
 
             mName = (TextView) itemView.findViewById(R.id.tvName);
             mClub = (TextView) itemView.findViewById(R.id.tvClub);
+            //7
+            itemView.setOnClickListener(this);
 
+        }
+
+        //6
+        @Override
+        public void onClick(View view) {
+            int clickedPosition = getAdapterPosition();
+            mOnClickListener.onListItemClick(clickedPosition);
         }
     }
 
