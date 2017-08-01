@@ -24,13 +24,19 @@ public class MainActivity extends AppCompatActivity implements CustomerAdapter.L
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //สร้าง recyclerVeiw ขึ้นมา
         mRecyclerView = (RecyclerView) findViewById(R.id.rvR);
+        //สร้าง Layout Manager
         mlayoutManager = new LinearLayoutManager(this);
         //mRecyclerView.setHasFixedSize(true);
 
+        //set layout manager ให้กับ recyclerView
         mRecyclerView.setLayoutManager(mlayoutManager);
 
+        //กำหนด Adapter ให้ recyclerView
+        // 1.สร้าง new adapter จาก CustomerAdapter ที่สร้างไว้
         mAdapter = new CustomerAdapter(this,initPlayer(), this);
+        // 2.set Adapter ให้ recyclerView
         mRecyclerView.setAdapter(mAdapter);
 
     }
@@ -61,5 +67,8 @@ public class MainActivity extends AppCompatActivity implements CustomerAdapter.L
         String toastMessage = "Item #"+ clickedItemIndex +" clicked.";
         mToast = Toast.makeText(this,toastMessage,Toast.LENGTH_LONG);
         mToast.show();
+
+
+
     }
 }

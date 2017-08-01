@@ -7,7 +7,7 @@
     android:padding="24dp">
 
     <ImageView
-        android:id="@+id/imgPlayer"
+        android:id="@+id/imvPlayer"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:src="@drawable/prfile"
